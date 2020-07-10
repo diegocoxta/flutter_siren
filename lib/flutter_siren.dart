@@ -9,7 +9,6 @@ import 'package:flutter_siren/services/apple_app_store.dart';
 import 'package:flutter_siren/services/google_play_store.dart';
 
 class Siren {
-  String storeVersion;
   String storeUrl;
 
   Future<String> _getVersion() async {
@@ -22,39 +21,34 @@ class Siren {
     return packageInfo.packageName;
   }
 
-  Future<String> _getStoreVersion() async {
-    String packageName = await _getPackage();
-
-    if (Platform.isIOS) {
-      final applicationDetails = await AppleAppStore.getStoreDetails(from: packageName);
-      this.storeUrl = 'https://apps.apple.com/app/id${applicationDetails.trackId.toString()}?mt=8';
-      this.storeVersion = applicationDetails.version;
-    }
-
-    if (Platform.isAndroid) {
-      this.storeUrl = 'https://play.google.com/store/apps/details?id=$packageName';
-      this.storeVersion = await GooglePlayStore.getLatestVersion(from: packageName);
-    }
-
-    return this.storeVersion;
-  }
-
   void _openStoreUrl(BuildContext context) async {
+    if (this.storeUrl == null) {
+      return null;
+    }
+
     try {
       if (await canLaunch(this.storeUrl)) {
         await launch(this.storeUrl, forceSafariVC: false);
       }
-      
-      Navigator.of(context).pop();
     }
-    on PlatformException {
-      Navigator.of(context).pop();
-    }
+    on PlatformException {}
   }
 
   Future<bool> updateIsAvailable() async {
     String currentVersion = await _getVersion();
-    String newVersion = await _getStoreVersion();
+    String packageName = await _getPackage();
+    String newVersion = currentVersion;
+
+    if (Platform.isIOS) {
+      final applicationDetails = await AppleAppStore.getStoreDetails(from: packageName);
+      this.storeUrl = 'https://apps.apple.com/app/id${applicationDetails.trackId.toString()}?mt=8';
+      newVersion = applicationDetails.version;
+    }
+
+    if (Platform.isAndroid) {
+      this.storeUrl = 'https://play.google.com/store/apps/details?id=$packageName';
+      newVersion = await GooglePlayStore.getLatestVersion(from: packageName);
+    }
 
     return currentVersion != newVersion;
   }
@@ -79,7 +73,10 @@ class Siren {
 
     buttons.add(FlatButton(
       child: Text(buttonUpgradeText),
-      onPressed: () => _openStoreUrl(context),
+      onPressed: () {
+        _openStoreUrl(context);
+        Navigator.of(context).pop();
+      },
     ));
 
     return showDialog<void>(
