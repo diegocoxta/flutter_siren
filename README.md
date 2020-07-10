@@ -1,6 +1,8 @@
-# flutter_siren
+# 📦 flutter_siren
 
 The Flutter port of the popular [Siren](https://github.com/ArtSabintsev/Siren), a package to notify users when a new version of your app is available and prompt them to upgrade.
+
+🚀 Supports iOS and Android.
 
 ## Install
 Add this to your package's pubspec.yaml file:
