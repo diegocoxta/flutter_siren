@@ -4,9 +4,6 @@ The Flutter port of the popular [Siren](https://github.com/ArtSabintsev/Siren), 
 
 🚀 Supports iOS and Android.
 
-![Screenshot showing the siren example](https://github.com/diegocosta/flutter_siren/blob/master/example/example.png?raw=true)
-
-
 ## Install
 Add this to your package's pubspec.yaml file:
 
