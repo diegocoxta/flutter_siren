@@ -1,14 +1,13 @@
 import 'dart:convert';
-import 'package:flutter_siren/services/apple_app_store.dart';
 import 'package:http/testing.dart';
 import 'package:http/http.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_siren/services/apple_app_store.dart';
 
 void main() async {
-  final appStore = AppleAppStore();
 
   void mockClient(Object response) {
-    appStore.client = MockClient((request) async {
+    AppleAppStore.client = MockClient((request) async {
       return Response(json.encode(response), 200);
     });
   }
@@ -18,13 +17,16 @@ void main() async {
       'resultCount': 1, 
       'results': [
         { 
-          'version': '83.0.4103.88'
+          'version': '83.0.4103.88',
+          'trackId': 535886823
         }
       ]
     });
 
-    final version = await appStore.getLatestVersion('com.google.chrome.ios');
-    expect(version, '83.0.4103.88');
+    final details = await AppleAppStore.getStoreDetails(from: 'com.google.chrome.ios');
+
+    expect(details.version, '83.0.4103.88');
+    expect(details.trackId, 535886823);
   });
 
   test('should not return the iOS Google Chrome app version', () async {
@@ -33,7 +35,9 @@ void main() async {
       'results': []
     });
 
-    final version = await appStore.getLatestVersion('com.google.chrome.iosx');
-    expect(version, '');
+    final details = await AppleAppStore.getStoreDetails(from: 'com.google.chrome.iosx');
+    
+    expect(details.version, null);
+    expect(details.trackId, null);
   });
 }

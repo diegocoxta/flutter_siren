@@ -1,15 +1,19 @@
-
 import 'dart:convert';
 import 'package:http/http.dart';
-import 'package:flutter_siren/services/store_service.dart';
 
-class AppleAppStore implements StoreService {
-  Client client = new Client();
+class StoreDetails {
+  final String version;
+  final int trackId;
+  
+  StoreDetails({ this.version, this.trackId });
+}
 
-  @override
-  Future<String> getLatestVersion(String package) async {
+class AppleAppStore {
+  static Client client = new Client();
+
+  static Future<StoreDetails> getStoreDetails({ String from }) async  {
     final response = await client.get(
-      'https://itunes.apple.com/lookup?bundleId=$package', 
+      'https://itunes.apple.com/lookup?bundleId=$from', 
       headers: {
         'Cache-Control': 'no-cache',
         'Content-Type': 'application/json',
@@ -18,15 +22,18 @@ class AppleAppStore implements StoreService {
     );
 
     if (response == null) {
-      return '';
+      return StoreDetails();
     }
 
     final decodedBody = json.decode(response.body);
 
     if (decodedBody == null || decodedBody['resultCount'] == 0) {
-      return '';
+      return StoreDetails();
     }
 
-    return decodedBody['results'][0]['version'];
+    return StoreDetails(
+      version: decodedBody['results'][0]['version'],
+      trackId: decodedBody['results'][0]['trackId']
+    );
   }
 }
