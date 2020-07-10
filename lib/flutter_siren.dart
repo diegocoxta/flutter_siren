@@ -5,48 +5,49 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:package_info/package_info.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter_siren/services/apple_app_store.dart';
-import 'package:flutter_siren/services/google_play_store.dart';
+import 'services/apple_app_store.dart';
+import 'services/google_play_store.dart';
 
 class Siren {
   String storeUrl;
 
   Future<String> _getVersion() async {
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    final packageInfo = await PackageInfo.fromPlatform();
     return packageInfo.version;
   }
 
   Future<String> _getPackage() async {
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    final packageInfo = await PackageInfo.fromPlatform();
     return packageInfo.packageName;
   }
 
   void _openStoreUrl(BuildContext context) async {
-    if (this.storeUrl == null) {
+    if (storeUrl == null) {
       return null;
     }
 
     try {
-      if (await canLaunch(this.storeUrl)) {
-        await launch(this.storeUrl, forceSafariVC: false);
+      if (await canLaunch(storeUrl)) {
+        await launch(storeUrl, forceSafariVC: false);
       }
     }
     on PlatformException {}
   }
 
   Future<bool> updateIsAvailable() async {
-    String currentVersion = await _getVersion();
-    String packageName = await _getPackage();
-    String newVersion = currentVersion;
+    final currentVersion = await _getVersion();
+    final packageName = await _getPackage();
+    var newVersion = currentVersion;
 
     if (Platform.isIOS) {
-      final applicationDetails = await AppleAppStore.getStoreDetails(from: packageName);
-      this.storeUrl = 'https://apps.apple.com/app/id${applicationDetails.trackId.toString()}?mt=8';
+      final applicationDetails = await AppleAppStore
+        .getStoreDetails(from: packageName);
+      storeUrl = 'https://apps.apple.com/app/id${applicationDetails.trackId.toString()}?mt=8';
       newVersion = applicationDetails.version;
     }
 
     if (Platform.isAndroid) {
-      this.storeUrl = 'https://play.google.com/store/apps/details?id=$packageName';
+      storeUrl = 'https://play.google.com/store/apps/details?id=$packageName';
       newVersion = await GooglePlayStore.getLatestVersion(from: packageName);
     }
 
@@ -55,7 +56,8 @@ class Siren {
 
   Future<void> promptUpdate(BuildContext context, {
     String title = 'Update Available',
-    String message = 'There is an updated version available on the App Store. Would you like to upgrade?',
+    String message = '''
+There is an updated version available on the App Store. Would you like to upgrade?''',
     String buttonUpgradeText = 'Upgrade',
     String buttonCancelText = 'Cancel',
     bool forceUpgrade = false
@@ -82,10 +84,10 @@ class Siren {
     return showDialog<void>(
       context: context,
       barrierDismissible: false,
-      builder: (BuildContext context) {
+      builder: (context) {
         return FutureBuilder<bool>(
           future: updateIsAvailable(),
-          builder: (context, AsyncSnapshot<bool> snapshot){ 
+          builder: (context, snapshot){ 
             if (snapshot.hasData) {
               return AlertDialog(
                 title: Text(title),

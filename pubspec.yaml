@@ -1,8 +1,8 @@
 name: flutter_siren
-description: A new Flutter package project.
+description: One way to notify users when a new version of your app is available and prompt them to upgrade.
 version: 0.0.1
-author:
-homepage:
+homepage: https://github.com/diegocosta/flutter_siren
+issue_tracker: https://github.com/diegocosta/flutter_siren/issues
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -17,6 +17,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  effective_dart: ^1.2.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
