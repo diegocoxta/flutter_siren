@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
 
 ```
 
-## Customizing the Prompt Update. 
+## Customizing the prompt update. 
 
 | value             | Description             | default |
 | -------------     |-------------            | -----|
@@ -77,3 +77,25 @@ siren.promptUpdate(context,
 );
 ```
 
+## Building your own prompt update.
+
+Your can use the `updateIsAvailable` method to create your own way to alert the user about new updates. This method returns a boolean and you do your magic!  
+```dart 
+final siren = Siren();
+
+FutureBuilder<bool>(
+  future: updateIsAvailable(),
+  builder: (context, AsyncSnapshot<bool> snapshot){ 
+    if (snapshot.hasData) {
+      return AlertDialog(
+        title: Text(title),
+        content: Text(message),
+        actions: <Widget>[],
+      );
+    }
+  }
+);
+```
+
+## Inspiration
+These awesome packages: [Siren](https://github.com/ArtSabintsev/Siren) and [react-native-siren](https://github.com/GantMan/react-native-siren)
