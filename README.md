@@ -84,7 +84,7 @@ Your can use the `updateIsAvailable` method to create your own way to alert the 
 final siren = Siren();
 
 FutureBuilder<bool>(
-  future: updateIsAvailable(),
+  future: siren.updateIsAvailable(),
   builder: (context, AsyncSnapshot<bool> snapshot){ 
     if (snapshot.hasData) {
       return AlertDialog(
