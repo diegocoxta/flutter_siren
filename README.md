@@ -54,7 +54,30 @@ class MyApp extends StatelessWidget {
   }
 }
 
+
 // or create your custom dialog modal
 
 
 ```
+
+## Customizing the Prompt Update. 
+
+| value             | Description             | default |
+| -------------     |-------------            | -----|
+|title              | Alert title             | Update Available |
+|message            | Alert Message           | There is an updated version available on the App Store. Would you like to upgrade? |
+|buttonUpgradeText  | Upgrade Button Text     | Upgrade |
+|buttonCancelText   | Cancel Button Text      | Cancel |
+|forceUpgrade       | Hide Cancel Button      | false |
+
+```dart
+// Passing custom options.
+siren.promptUpdate(context, 
+  title: "My alert title", 
+  message: "Bro, update my app", 
+  buttonUpgradeText: "Download",  
+  buttonCancelText: "Nop",
+  forceUpgrade: true
+);
+```
+
