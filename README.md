@@ -54,10 +54,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
-// or create your custom dialog modal
-
-
 ```
 
 ## Customizing the Prompt Update. 
