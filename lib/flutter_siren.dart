@@ -30,8 +30,7 @@ class Siren {
       if (await canLaunch(storeUrl)) {
         await launch(storeUrl, forceSafariVC: false);
       }
-    }
-    on PlatformException {}
+    } on PlatformException {}
   }
 
   Future<bool> updateIsAvailable() async {
@@ -40,9 +39,10 @@ class Siren {
     var newVersion = currentVersion;
 
     if (Platform.isIOS) {
-      final applicationDetails = await AppleAppStore
-        .getStoreDetails(from: packageName);
-      storeUrl = 'https://apps.apple.com/app/id${applicationDetails.trackId.toString()}?mt=8';
+      final applicationDetails =
+          await AppleAppStore.getStoreDetails(from: packageName);
+      storeUrl =
+          'https://apps.apple.com/app/id${applicationDetails.trackId.toString()}?mt=8';
       newVersion = applicationDetails.version;
     }
 
@@ -54,14 +54,13 @@ class Siren {
     return currentVersion != newVersion;
   }
 
-  Future<void> promptUpdate(BuildContext context, {
-    String title = 'Update Available',
-    String message = '''
+  Future<void> promptUpdate(BuildContext context,
+      {String title = 'Update Available',
+      String message = '''
 There is an updated version available on the App Store. Would you like to upgrade?''',
-    String buttonUpgradeText = 'Upgrade',
-    String buttonCancelText = 'Cancel',
-    bool forceUpgrade = false
-  }) async {
+      String buttonUpgradeText = 'Upgrade',
+      String buttonCancelText = 'Cancel',
+      bool forceUpgrade = false}) async {
     final buttons = <Widget>[];
 
     if (!forceUpgrade) {
@@ -86,19 +85,18 @@ There is an updated version available on the App Store. Would you like to upgrad
       barrierDismissible: false,
       builder: (context) {
         return FutureBuilder<bool>(
-          future: updateIsAvailable(),
-          builder: (context, snapshot){ 
-            if (snapshot.hasData) {
-              return AlertDialog(
-                title: Text(title),
-                content: Text(message),
-                actions: buttons,
-              );
-            }
+            future: updateIsAvailable(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return AlertDialog(
+                  title: Text(title),
+                  content: Text(message),
+                  actions: buttons,
+                );
+              }
 
-            return Container();
-          }
-        );
+              return Container();
+            });
       },
     );
   }

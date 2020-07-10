@@ -4,22 +4,20 @@ import 'package:http/http.dart';
 class StoreDetails {
   final String version;
   final int trackId;
-  
-  StoreDetails({ this.version, this.trackId });
+
+  StoreDetails({this.version, this.trackId});
 }
 
 class AppleAppStore {
-  static Client client = new Client();
+  static Client client = Client();
 
-  static Future<StoreDetails> getStoreDetails({ String from }) async  {
-    final response = await client.get(
-      'https://itunes.apple.com/lookup?bundleId=$from', 
-      headers: {
-        'Cache-Control': 'no-cache',
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      }
-    );
+  static Future<StoreDetails> getStoreDetails({String from}) async {
+    final response = await client
+        .get('https://itunes.apple.com/lookup?bundleId=$from', headers: {
+      'Cache-Control': 'no-cache',
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    });
 
     if (response == null) {
       return StoreDetails();
@@ -32,8 +30,7 @@ class AppleAppStore {
     }
 
     return StoreDetails(
-      version: decodedBody['results'][0]['version'],
-      trackId: decodedBody['results'][0]['trackId']
-    );
+        version: decodedBody['results'][0]['version'],
+        trackId: decodedBody['results'][0]['trackId']);
   }
 }
