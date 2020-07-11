@@ -1,4 +1,4 @@
-# 0.1.0 (2020-07-11)
+# 0.2.0 (2020-07-11)
 
 
 ### Bug Fixes
@@ -9,6 +9,7 @@
 ### Features
 
 * added github action initial workflow ([c415a33](https://github.com/diegocosta/flutter_siren/commit/c415a33dcf5ff4453f37d32970c48435fee11fcf))
+* improved github action ([8a08bbd](https://github.com/diegocosta/flutter_siren/commit/8a08bbd0d5d9733dea034748549e44f7b35a3111))
 
 
 
