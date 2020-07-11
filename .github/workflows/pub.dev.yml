@@ -32,4 +32,6 @@ jobs:
       with:
         github-token: ${{ secrets.github_token }}
         release-count: '0'
-        version-file: './pubspec.yaml'
+        version-file: 'pubspec.yaml'
+        git-user-name: 'Diego Costa'
+        git-user-email: 'diego@diegocosta.com.br'
