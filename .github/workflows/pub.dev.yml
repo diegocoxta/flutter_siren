@@ -20,7 +20,7 @@ jobs:
         channel: 'stable'
     - run: flutter pub get
     - run: flutter test
-  versioning:
+  publish:
     needs: test
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
@@ -42,13 +42,7 @@ jobs:
         tag_name: ${{ steps.changelog.outputs.tag }}
         release_name: ${{ steps.changelog.outputs.tag }}
         body: ${{ steps.changelog.outputs.clean_changelog }}
-  publish:
-    needs: versioning
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-    steps:
-      - uses: actions/checkout@v2
-      - uses: k-paxian/dart-package-publisher@master
-        with:
-          accessToken: ${{ secrets.OAUTH_ACCESS_TOKEN }}
-          refreshToken: ${{ secrets.OAUTH_REFRESH_TOKEN }}
+    - uses: k-paxian/dart-package-publisher@master
+      with:
+        accessToken: ${{ secrets.OAUTH_ACCESS_TOKEN }}
+        refreshToken: ${{ secrets.OAUTH_REFRESH_TOKEN }}
