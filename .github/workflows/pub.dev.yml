@@ -1,0 +1,35 @@
+on: [push, pull_request]
+name: Test and maybe Publish
+jobs:
+  package-analysis:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2 
+    - uses: axel-op/dart-package-analyzer@v2
+      with:
+        githubToken: ${{ secrets.GITHUB_TOKEN }}
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-java@v1
+      with:
+        java-version: '12.x'
+    - uses: subosito/flutter-action@v1
+      with:
+        channel: 'stable'
+    - run: flutter pub get
+    - run: flutter test
+  publish:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    steps:
+    - name: checkout
+      uses: actions/checkout@v2
+    - name: changelog
+      uses: TriPSs/conventional-changelog-action@v3
+      with:
+        github-token: ${{ secrets.github_token }}
+        release-count: '0'
+        version-file: './pubspec.yaml'
