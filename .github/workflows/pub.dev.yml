@@ -26,7 +26,10 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     steps:
     - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
     - uses: TriPSs/conventional-changelog-action@v3
+      id: changelog
       with:
         github-token: ${{ secrets.github_token }}
         release-count: '10'
@@ -34,3 +37,15 @@ jobs:
         version-path: 'version'
         git-user-name: 'Diego Costa'
         git-user-email: 'diego@diegocosta.com.br'
+    - uses: actions/create-release@v1
+      if: ${{ steps.changelog.outputs.skipped == 'false' }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.github_token }}
+      with:
+        tag_name: ${{ steps.changelog.outputs.tag }}
+        release_name: ${{ steps.changelog.outputs.tag }}
+        body: ${{ steps.changelog.outputs.clean_changelog }}
+    - uses: k-paxian/dart-package-publisher@master
+      with:
+        accessToken: ${{ secrets.OAUTH_ACCESS_TOKEN }}
+        refreshToken: ${{ secrets.OAUTH_REFRESH_TOKEN }}
