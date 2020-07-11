@@ -1,5 +1,5 @@
 on: [push, pull_request]
-name: Test and maybe Publish
+name: flutter_siren workflow
 jobs:
   package-analysis:
     runs-on: ubuntu-latest
@@ -25,13 +25,12 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     steps:
-    - name: checkout
-      uses: actions/checkout@v2
-    - name: changelog
-      uses: TriPSs/conventional-changelog-action@v3
+    - uses: actions/checkout@v2
+    - uses: TriPSs/conventional-changelog-action@v3
       with:
         github-token: ${{ secrets.github_token }}
-        release-count: '0'
-        version-file: 'pubspec.yaml'
+        release-count: '10'
+        version-file: './pubspec.yaml'
+        version-path: 'version'
         git-user-name: 'Diego Costa'
         git-user-email: 'diego@diegocosta.com.br'
