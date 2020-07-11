@@ -26,8 +26,6 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     steps:
     - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
     - uses: TriPSs/conventional-changelog-action@v3
       id: changelog
       with:
