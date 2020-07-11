@@ -1,4 +1,4 @@
-# 0.4.0 (2020-07-11)
+# 0.5.0 (2020-07-11)
 
 
 ### Bug Fixes
@@ -14,6 +14,7 @@
 
 * added github action initial workflow ([c415a33](https://github.com/diegocosta/flutter_siren/commit/c415a33dcf5ff4453f37d32970c48435fee11fcf))
 * added pub.dev deployment to github action ([116f4f5](https://github.com/diegocosta/flutter_siren/commit/116f4f5ddc98f8d0dd244e02fd9f7de1e094e5aa))
+* finished workflow w/ ga ([7e8b934](https://github.com/diegocosta/flutter_siren/commit/7e8b934224ebeb6a063ec5ce0c44ec7d41f52e44))
 * improved github action ([8a08bbd](https://github.com/diegocosta/flutter_siren/commit/8a08bbd0d5d9733dea034748549e44f7b35a3111))
 
 
