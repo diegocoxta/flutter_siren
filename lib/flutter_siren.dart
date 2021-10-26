@@ -1,15 +1,17 @@
 library flutter_siren;
 
 import 'dart:io' show Platform;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:package_info/package_info.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 import 'services/apple_app_store.dart';
 import 'services/google_play_store.dart';
 
 class Siren {
-  String storeUrl;
+  String storeUrl = '';
 
   Future<String> _getVersion() async {
     final packageInfo = await PackageInfo.fromPlatform();
@@ -22,8 +24,8 @@ class Siren {
   }
 
   void _openStoreUrl(BuildContext context) async {
-    if (storeUrl == null) {
-      return null;
+    if (storeUrl == '') {
+      return;
     }
 
     try {
@@ -41,14 +43,15 @@ class Siren {
     if (Platform.isIOS) {
       final applicationDetails =
           await AppleAppStore.getStoreDetails(from: packageName);
-      storeUrl =
-          'https://apps.apple.com/app/id${applicationDetails.trackId.toString()}?mt=8';
+      storeUrl = 'https://apps.apple.com/app/id$packageName?mt=8';
       newVersion = applicationDetails.version;
     }
 
     if (Platform.isAndroid) {
+      final applicationDetails =
+          await GooglePlayStore.getStoreDetails(from: packageName);
       storeUrl = 'https://play.google.com/store/apps/details?id=$packageName';
-      newVersion = await GooglePlayStore.getLatestVersion(from: packageName);
+      newVersion = applicationDetails.version;
     }
 
     return currentVersion != newVersion;
