@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_siren/flutter_siren.dart';
+import 'package:flutter_siren/flutter_siren_ui.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  Future<void> _showPromptUpdate(BuildContext context) async {
-    final siren = Siren();
-    siren.promptUpdate(context);
-  }
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,30 +17,25 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: Scaffold(
-        appBar: AppBar(
-          title: Text('Flutter Siren Demo'),
-        ),
-        body: Builder(builder: (context) => Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'Press the following button to show the update dialog:',
-              ),
-              FlatButton(
-                child: Text('Check Update'),
-                color: Colors.blue,
-                textColor: Colors.white,
-                padding: EdgeInsets.all(8.0),
-                splashColor: Colors.blueAccent,
-                onPressed: () => _showPromptUpdate(context),
-              )
-            ],
+          appBar: AppBar(
+            title: const Text('Flutter Siren Demo'),
           ),
-        ),
-        )
-      ),
+          body: Builder(
+            builder: (context) => Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  const Text(
+                    'Press the following button to show the update dialog:',
+                  ),
+                  TextButton(
+                    child: const Text('Check Update'),
+                    onPressed: () => SirenUI.promptUser(context),
+                  )
+                ],
+              ),
+            ),
+          )),
     );
   }
 }
-
