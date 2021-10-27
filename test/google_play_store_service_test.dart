@@ -16,7 +16,7 @@ void main() async {
     ''');
 
     final details =
-        await GooglePlayStore.getStoreDetails(from: 'com.android.chrome');
+        await GooglePlayStore().getStoreUpdate(from: 'com.android.chrome');
 
     expect(details.version, '2.3.5');
     expect(details.package, 'com.android.chrome');
@@ -26,7 +26,7 @@ void main() async {
     mockClient('<html><body>not expected response</body></html>');
 
     final details =
-        await GooglePlayStore.getStoreDetails(from: 'com.android.chrome');
+        await GooglePlayStore().getStoreUpdate(from: 'com.android.chrome');
 
     expect(details.version, '');
     expect(details.package, '');

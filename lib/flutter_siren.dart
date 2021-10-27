@@ -2,105 +2,44 @@ library flutter_siren;
 
 import 'dart:io' show Platform;
 
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_siren/entities/siren_store_response.dart';
+import 'package:flutter_siren/entities/siren_store_service.dart';
+import 'package:flutter_siren/services/apple_app_store.dart';
+import 'package:flutter_siren/services/google_play_store.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:url_launcher/url_launcher.dart';
-
-import 'services/apple_app_store.dart';
-import 'services/google_play_store.dart';
 
 class Siren {
-  String storeUrl = '';
-
-  Future<String> _getVersion() async {
-    final packageInfo = await PackageInfo.fromPlatform();
-    return packageInfo.version;
-  }
-
-  Future<String> _getPackage() async {
-    final packageInfo = await PackageInfo.fromPlatform();
-    return packageInfo.packageName;
-  }
-
-  void _openStoreUrl(BuildContext context) async {
-    if (storeUrl == '') {
-      return;
-    }
-
-    try {
-      if (await canLaunch(storeUrl)) {
-        await launch(storeUrl, forceSafariVC: false);
-      }
-    } on PlatformException {}
-  }
-
-  Future<bool> updateIsAvailable() async {
-    final currentVersion = await _getVersion();
-    final packageName = await _getPackage();
-    var newVersion = currentVersion;
-
+  static SirenStoreService _getStoreClient() {
     if (Platform.isIOS) {
-      final applicationDetails =
-          await AppleAppStore.getStoreDetails(from: packageName);
-      storeUrl = 'https://apps.apple.com/app/id$packageName?mt=8';
-      newVersion = applicationDetails.version;
+      return AppleAppStore();
     }
 
-    if (Platform.isAndroid) {
-      final applicationDetails =
-          await GooglePlayStore.getStoreDetails(from: packageName);
-      storeUrl = 'https://play.google.com/store/apps/details?id=$packageName';
-      newVersion = applicationDetails.version;
-    }
-
-    return currentVersion != newVersion;
+    return GooglePlayStore();
   }
 
-  Future<void> promptUpdate(BuildContext context,
-      {String title = 'Update Available',
-      String message = '''
-There is an updated version available on the App Store. Would you like to upgrade?''',
-      String buttonUpgradeText = 'Upgrade',
-      String buttonCancelText = 'Cancel',
-      bool forceUpgrade = false}) async {
-    final buttons = <Widget>[];
+  static Future<SirenUpdate> performCheck() async {
+    final packageInfo = await PackageInfo.fromPlatform();
 
-    if (!forceUpgrade) {
-      buttons.add(FlatButton(
-        child: Text(buttonCancelText),
-        onPressed: () {
-          Navigator.of(context).pop();
-        },
-      ));
-    }
+    final currentVersion = packageInfo.version;
+    final packageName = packageInfo.packageName;
 
-    buttons.add(FlatButton(
-      child: Text(buttonUpgradeText),
-      onPressed: () {
-        _openStoreUrl(context);
-        Navigator.of(context).pop();
-      },
-    ));
+    final storeDetails =
+        await _getStoreClient().getStoreUpdate(from: packageName);
 
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) {
-        return FutureBuilder<bool>(
-            future: updateIsAvailable(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return AlertDialog(
-                  title: Text(title),
-                  content: Text(message),
-                  actions: buttons,
-                );
-              }
+    // TODO: Implement a new way to check and parse the version of app.
+    var newVersion = currentVersion;
+    newVersion = storeDetails.version;
 
-              return Container();
-            });
-      },
-    );
+    final updateIsAvailable = currentVersion != newVersion;
+
+    return SirenUpdate(
+        updateIsAvailable: updateIsAvailable, details: storeDetails);
   }
+}
+
+class SirenUpdate {
+  final SirenStoreResponse details;
+  final bool updateIsAvailable;
+
+  SirenUpdate({required this.details, required this.updateIsAvailable});
 }

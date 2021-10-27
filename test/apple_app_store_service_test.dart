@@ -21,7 +21,7 @@ void main() async {
     });
 
     final details =
-        await AppleAppStore.getStoreDetails(from: 'com.google.chrome.ios');
+        await AppleAppStore().getStoreUpdate(from: 'com.google.chrome.ios');
 
     expect(details.version, '83.0.4103.88');
     expect(details.package, '535886823');
@@ -31,7 +31,7 @@ void main() async {
     mockClient({'resultCount': 0, 'results': []});
 
     final details =
-        await AppleAppStore.getStoreDetails(from: 'com.google.chrome.iosx');
+        await AppleAppStore().getStoreUpdate(from: 'com.google.chrome.iosx');
 
     expect(details.version, '');
     expect(details.package, '');
