@@ -3,9 +3,7 @@ import 'dart:convert';
 import 'package:flutter_siren/src/entities/siren_store_response.dart';
 import 'package:flutter_siren/src/entities/siren_store_service.dart';
 import 'package:http/http.dart';
-import 'package:meta/meta.dart';
 
-@visibleForTesting
 class SirenAppleAppStore implements SirenStoreService<SirenStoreResponse> {
   static Client client = Client();
 
