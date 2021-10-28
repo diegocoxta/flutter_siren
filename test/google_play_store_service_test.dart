@@ -12,7 +12,9 @@ void main() async {
   }
 
   test('should return the Android SanarFlix app version', () async {
-    mockClient('<div class="hAyfc"><div class="BgcNfc">Current Version</div><span class="htlgb"><div class="IQ1z0d"><span class="htlgb">1.25.0</span></div></span></div>');
+     mockClient('''
+    <div class="hAyfc"><div class="BgcNfc">Size</div><span class="htlgb"><div class="IQ1z0d"><span class="htlgb">42M</span></div></span></div><div class="hAyfc"><div class="BgcNfc">Installs</div><span class="htlgb"><div class="IQ1z0d"><span class="htlgb">100,000+</span></div></span></div><div class="hAyfc"><div class="BgcNfc">Current Version</div><span class="htlgb"><div class="IQ1z0d"><span class="htlgb">1.25.0</span></div></span></div><div class="hAyfc"><div class="BgcNfc">Requires Android</div><span class="htlgb"><div class="IQ1z0d"><span class="htlgb">4.4 and up</span></div></span></div><div class="hAyfc"><div class="BgcNfc">Content Rating</div><span class="htlgb"><div class="IQ1z0d"><span class="htlgb"><div>All ages</div>
+    ''');
 
     final version = await GooglePlayStore.getLatestVersion(from: 'com.android.chrome');
     expect(version, '1.25.0');
