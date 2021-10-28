@@ -1,10 +1,13 @@
 library flutter_siren;
 
 import 'dart:io' show Platform;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:package_info/package_info.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:version/version.dart';
+
 import 'services/apple_app_store.dart';
 import 'services/google_play_store.dart';
 
@@ -51,7 +54,7 @@ class Siren {
       newVersion = await GooglePlayStore.getLatestVersion(from: packageName);
     }
 
-    return currentVersion != newVersion;
+    return Version.parse(newVersion) > Version.parse(currentVersion);
   }
 
   Future<void> promptUpdate(BuildContext context,
@@ -64,7 +67,7 @@ There is an updated version available on the App Store. Would you like to upgrad
     final buttons = <Widget>[];
 
     if (!forceUpgrade) {
-      buttons.add(FlatButton(
+      buttons.add(TextButton(
         child: Text(buttonCancelText),
         onPressed: () {
           Navigator.of(context).pop();
@@ -72,7 +75,7 @@ There is an updated version available on the App Store. Would you like to upgrad
       ));
     }
 
-    buttons.add(FlatButton(
+    buttons.add(TextButton(
       child: Text(buttonUpgradeText),
       onPressed: () {
         _openStoreUrl(context);

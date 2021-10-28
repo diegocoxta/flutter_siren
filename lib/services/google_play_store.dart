@@ -12,7 +12,7 @@ class GooglePlayStore {
     }
 
     final match =
-        RegExp(r'Current Version.+>([\d.]{1,10})').firstMatch(response.body);
+        RegExp(r'Current Version.+>([\d.]{1,20})(?=<\/span>)').firstMatch(response.body);
 
     if (match == null) {
       return null;
