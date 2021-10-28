@@ -64,7 +64,7 @@ There is an updated version available on the App Store. Would you like to upgrad
     final buttons = <Widget>[];
 
     if (!forceUpgrade) {
-      buttons.add(FlatButton(
+      buttons.add(TextButton(
         child: Text(buttonCancelText),
         onPressed: () {
           Navigator.of(context).pop();
@@ -72,7 +72,7 @@ There is an updated version available on the App Store. Would you like to upgrad
       ));
     }
 
-    buttons.add(FlatButton(
+    buttons.add(TextButton(
       child: Text(buttonUpgradeText),
       onPressed: () {
         _openStoreUrl(context);
