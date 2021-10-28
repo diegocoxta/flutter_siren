@@ -5,7 +5,7 @@ class GooglePlayStore {
 
   static Future<String> getLatestVersion({String from}) async {
     final response = await client
-        .get('https://play.google.com/store/apps/details?id=$from&hl=en');
+        .get(Uri.parse('https://play.google.com/store/apps/details?id=$from&hl=en'));
 
     if (response == null) {
       return null;

@@ -13,7 +13,7 @@ class AppleAppStore {
 
   static Future<StoreDetails> getStoreDetails({String from}) async {
     final response = await client
-        .get('https://itunes.apple.com/lookup?bundleId=$from', headers: {
+        .get(Uri.parse('https://itunes.apple.com/lookup?bundleId=$from'), headers: {
       'Cache-Control': 'no-cache',
       'Content-Type': 'application/json',
       'Accept': 'application/json',
