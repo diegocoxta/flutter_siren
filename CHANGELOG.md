@@ -1,3 +1,12 @@
+## [1.0.1](https://github.com/diegocosta/flutter_siren/compare/v1.0.0...v1.0.1) (2021-10-28)
+
+
+### Bug Fixes
+
+* remove unused meta package ([777c8fb](https://github.com/diegocosta/flutter_siren/commit/777c8fb5f058454f3e5662370ad120809c4a95b5))
+
+
+
 # [1.0.0](https://github.com/diegocosta/flutter_siren/compare/v0.8.0...v1.0.0) (2021-10-28)
 
 
@@ -46,20 +55,6 @@
 * fixed versioning action ([c345165](https://github.com/diegocosta/flutter_siren/commit/c3451657295146d555f9201ea75c62b3248d9c2a))
 * fixed yaml file from ga ([1453459](https://github.com/diegocosta/flutter_siren/commit/1453459a8c83673f9dca210a991480c562c85ae4))
 * split the versioning and publish workflow ([c3f4896](https://github.com/diegocosta/flutter_siren/commit/c3f489641f748662da7420922536b371f519ddc9))
-
-
-
-# [0.3.0](https://github.com/diegocosta/flutter_siren/compare/v0.2.0...v0.3.0) (2020-07-11)
-
-
-### Bug Fixes
-
-* removed fetch-depth from actions/checkout ([502cf3d](https://github.com/diegocosta/flutter_siren/commit/502cf3dc12ca3c527ff7c7c3393dbb6e12fcb5a9))
-
-
-### Features
-
-* added pub.dev deployment to github action ([116f4f5](https://github.com/diegocosta/flutter_siren/commit/116f4f5ddc98f8d0dd244e02fd9f7de1e094e5aa))
 
 
 
