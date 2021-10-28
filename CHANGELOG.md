@@ -1,3 +1,19 @@
+# [1.0.0](https://github.com/diegocosta/flutter_siren/compare/v0.8.0...v1.0.0) (2021-10-28)
+
+
+### Features
+
+* new lib organization ([77755d1](https://github.com/diegocosta/flutter_siren/commit/77755d11cca73bae0bb87b96e83ae70e96b0d9fc))
+* upgrated all dependencies ([68aec1b](https://github.com/diegocosta/flutter_siren/commit/68aec1bb05ccf7d1bd26c5ab67ee99527474b5dc))
+* Using lutter_lints in analysis_options ([86e85e8](https://github.com/diegocosta/flutter_siren/commit/86e85e8bd9dadaf81be24b23f6c20a9217515503))
+
+
+### BREAKING CHANGES
+
+* upgrade dependencies and null safety support
+
+
+
 # [0.8.0](https://github.com/diegocosta/flutter_siren/compare/v0.5.0...v0.8.0) (2021-10-28)
 
 
@@ -44,21 +60,6 @@
 ### Features
 
 * added pub.dev deployment to github action ([116f4f5](https://github.com/diegocosta/flutter_siren/commit/116f4f5ddc98f8d0dd244e02fd9f7de1e094e5aa))
-
-
-
-# [0.2.0](https://github.com/diegocosta/flutter_siren/compare/c415a33dcf5ff4453f37d32970c48435fee11fcf...v0.2.0) (2020-07-11)
-
-
-### Bug Fixes
-
-* change git-user from ga ([6331e36](https://github.com/diegocosta/flutter_siren/commit/6331e363d56c8b64f836444b21617496a254723d))
-
-
-### Features
-
-* added github action initial workflow ([c415a33](https://github.com/diegocosta/flutter_siren/commit/c415a33dcf5ff4453f37d32970c48435fee11fcf))
-* improved github action ([8a08bbd](https://github.com/diegocosta/flutter_siren/commit/8a08bbd0d5d9733dea034748549e44f7b35a3111))
 
 
 
