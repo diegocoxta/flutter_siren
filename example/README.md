@@ -1,6 +1,6 @@
-# flutter_siren_example
+# example
 
-Demonstrates how to use the flutter_siren package.
+A new Flutter project.
 
 ## Getting Started
 
