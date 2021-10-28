@@ -24,7 +24,7 @@ void main() async {
         .getStoreResponse(from: 'com.google.chrome.ios');
 
     expect(details.version, '83.0.4103.88');
-    expect(details.package, 535886823);
+    expect(details.package, '535886823');
   });
 
   test('should not return the iOS Google Chrome app version', () async {
@@ -34,6 +34,6 @@ void main() async {
         .getStoreResponse(from: 'com.google.chrome.iosx');
 
     expect(details.version, '');
-    expect(details.package, 0);
+    expect(details.package, '');
   });
 }
