@@ -1,10 +1,10 @@
 import 'dart:io' show Platform;
 
 import 'package:flutter/material.dart';
-import 'package:flutter_siren/entities/siren_store_response.dart';
-import 'package:flutter_siren/entities/siren_store_service.dart';
-import 'package:flutter_siren/services/siren_apple_app_store.dart';
-import 'package:flutter_siren/services/siren_google_play_store.dart';
+import 'package:flutter_siren/src/entities/siren_store_response.dart';
+import 'package:flutter_siren/src/entities/siren_store_service.dart';
+import 'package:flutter_siren/src/services/siren_apple_app_store.dart';
+import 'package:flutter_siren/src/services/siren_google_play_store.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:version/version.dart';
