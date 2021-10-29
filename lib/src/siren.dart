@@ -15,11 +15,15 @@ class Siren {
       SirenStoreResponse(version: '', package: '', url: '');
 
   static SirenStoreService _getStoreClient() {
-    if (Platform.isIOS) {
+    if (Platform.isAndroid) {
+      return SirenGooglePlayStore();
+    }
+
+    if (Platform.isIOS || Platform.isMacOS) {
       return SirenAppleAppStore();
     }
 
-    return SirenGooglePlayStore();
+    throw UnimplementedError('This lib only supports Android, iOS and MacOS');
   }
 
   // This method checks for an update in the application store and returns if there is a newer version than the local one.
