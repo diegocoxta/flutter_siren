@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_siren/flutter_siren.dart';
-
 void main() {
   runApp(const MyApp());
 }
@@ -8,13 +7,10 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  Future<void> _showPromptUpdate(BuildContext context) async {
-    final siren = Siren();
-    siren.promptUpdate(context);
-  }
-
   @override
   Widget build(BuildContext context) {
+    final siren = Siren();
+
     return MaterialApp(
       title: 'Flutter Siren Demo',
       theme: ThemeData(
@@ -35,7 +31,7 @@ class MyApp extends StatelessWidget {
                   ),
                   TextButton(
                     child: const Text('Check Update'),
-                    onPressed: () => _showPromptUpdate(context),
+                    onPressed: () => siren.promptUpdate(context),
                   )
                 ],
               ),

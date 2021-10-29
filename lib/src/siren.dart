@@ -1,26 +1,32 @@
 import 'dart:io' show Platform;
 
 import 'package:flutter/material.dart';
-import 'package:flutter_siren/src/entities/siren_store_response.dart';
-import 'package:flutter_siren/src/entities/siren_store_service.dart';
-import 'package:flutter_siren/src/services/siren_apple_app_store.dart';
-import 'package:flutter_siren/src/services/siren_google_play_store.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:version/version.dart';
+
+import './entities/siren_store_response.dart';
+import './entities/siren_store_service.dart';
+import './services/siren_apple_app_store.dart';
+import './services/siren_google_play_store.dart';
 
 class Siren {
   SirenStoreResponse response =
       SirenStoreResponse(version: '', package: '', url: '');
 
   static SirenStoreService _getStoreClient() {
-    if (Platform.isIOS) {
+    if (Platform.isAndroid) {
+      return SirenGooglePlayStore();
+    }
+
+    if (Platform.isIOS || Platform.isMacOS) {
       return SirenAppleAppStore();
     }
 
-    return SirenGooglePlayStore();
+    throw UnimplementedError('This lib only supports Android, iOS and MacOS');
   }
 
+  // This method checks for an update in the application store and returns if there is a newer version than the local one.
   Future<bool> updateIsAvailable() async {
     final packageInfo = await PackageInfo.fromPlatform();
 
@@ -35,6 +41,7 @@ class Siren {
     return updateIsAvailable;
   }
 
+  // This method shows an customizable AlertDialog if an update is available.
   Future<void> promptUpdate(BuildContext context,
       {String title = 'Update Available',
       String message = '''
