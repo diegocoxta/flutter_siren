@@ -1,6 +1,7 @@
-import 'package:flutter_siren/src/entities/siren_store_response.dart';
-import 'package:flutter_siren/src/entities/siren_store_service.dart';
 import 'package:http/http.dart';
+
+import '../entities/siren_store_response.dart';
+import '../entities/siren_store_service.dart';
 
 class SirenGooglePlayStore implements SirenStoreService<SirenStoreResponse> {
   static Client client = Client();
