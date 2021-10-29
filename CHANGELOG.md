@@ -1,3 +1,17 @@
+# [1.1.0](https://github.com/diegocosta/flutter_siren/compare/v1.0.1...v1.1.0) (2021-10-29)
+
+
+### Bug Fixes
+
+* small lib improvements ([cab1daf](https://github.com/diegocosta/flutter_siren/commit/cab1daffb647a4d83c610b80d6c3774fdddb5967))
+
+
+### Features
+
+* adds support to macOS ([50c4491](https://github.com/diegocosta/flutter_siren/commit/50c449159bd108f25aeabc7aea1d8a1075f9d34e))
+
+
+
 ## [1.0.1](https://github.com/diegocosta/flutter_siren/compare/v1.0.0...v1.0.1) (2021-10-28)
 
 
@@ -44,17 +58,6 @@
 ### Features
 
 * finished workflow w/ ga ([7e8b934](https://github.com/diegocosta/flutter_siren/commit/7e8b934224ebeb6a063ec5ce0c44ec7d41f52e44))
-
-
-
-# [0.4.0](https://github.com/diegocosta/flutter_siren/compare/v0.3.0...v0.4.0) (2020-07-11)
-
-
-### Bug Fixes
-
-* fixed versioning action ([c345165](https://github.com/diegocosta/flutter_siren/commit/c3451657295146d555f9201ea75c62b3248d9c2a))
-* fixed yaml file from ga ([1453459](https://github.com/diegocosta/flutter_siren/commit/1453459a8c83673f9dca210a991480c562c85ae4))
-* split the versioning and publish workflow ([c3f4896](https://github.com/diegocosta/flutter_siren/commit/c3f489641f748662da7420922536b371f519ddc9))
 
 
 
