@@ -10,8 +10,9 @@ import './entities/siren_store_service.dart';
 import './services/siren_apple_app_store.dart';
 import './services/siren_google_play_store.dart';
 
+/// This class allows you to check the application store for new versions of your app.
 class Siren {
-  SirenStoreResponse response =
+  SirenStoreResponse _response =
       SirenStoreResponse(version: '', package: '', url: '');
 
   static SirenStoreService _getStoreClient() {
@@ -26,22 +27,22 @@ class Siren {
     throw UnimplementedError('This lib only supports Android, iOS and MacOS');
   }
 
-  // This method checks for an update in the application store and returns if there is a newer version than the local one.
+  /// This method checks for an update in the application store and returns if there is a newer version than the local one.
   Future<bool> updateIsAvailable() async {
     final packageInfo = await PackageInfo.fromPlatform();
 
     final currentVersion = packageInfo.version;
     final packageName = packageInfo.packageName;
 
-    response = await _getStoreClient().getStoreResponse(from: packageName);
+    _response = await _getStoreClient().getStoreResponse(from: packageName);
 
     final updateIsAvailable =
-        Version.parse(response.version) > Version.parse(currentVersion);
+        Version.parse(_response.version) > Version.parse(currentVersion);
 
     return updateIsAvailable;
   }
 
-  // This method shows an customizable AlertDialog if an update is available.
+  /// This method shows an customizable AlertDialog if an update is available.
   Future<void> promptUpdate(BuildContext context,
       {String title = 'Update Available',
       String message = '''
@@ -71,7 +72,7 @@ There is an updated version available on the App Store. Would you like to upgrad
                 buttons.add(TextButton(
                   child: Text(buttonUpgradeText),
                   onPressed: () async {
-                    final url = response.url;
+                    final url = _response.url;
 
                     if (url != '' && await canLaunch(url)) {
                       await launch(url, forceSafariVC: false);
