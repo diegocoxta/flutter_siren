@@ -1,3 +1,12 @@
+## [1.1.1](https://github.com/diegocosta/flutter_siren/compare/v1.1.0...v1.1.1) (2021-10-29)
+
+
+### Bug Fixes
+
+* added comments as dartdoc ([234770a](https://github.com/diegocosta/flutter_siren/commit/234770a4f1c562a743a67ff492e3683066ee0067))
+
+
+
 # [1.1.0](https://github.com/diegocosta/flutter_siren/compare/v1.0.1...v1.1.0) (2021-10-29)
 
 
@@ -49,15 +58,6 @@
 ### Features
 
 * using package version to compare semver strings ([90141c2](https://github.com/diegocosta/flutter_siren/commit/90141c26d83cc0448becad2b8e5cf8b9db1901d3))
-
-
-
-# [0.5.0](https://github.com/diegocosta/flutter_siren/compare/v0.4.0...v0.5.0) (2020-07-11)
-
-
-### Features
-
-* finished workflow w/ ga ([7e8b934](https://github.com/diegocosta/flutter_siren/commit/7e8b934224ebeb6a063ec5ce0c44ec7d41f52e44))
 
 
 
