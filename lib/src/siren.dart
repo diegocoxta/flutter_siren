@@ -27,6 +27,7 @@ class Siren {
     throw UnimplementedError('This lib only supports Android, iOS and MacOS');
   }
 
+  /// This method will get the local version downloaded of your app.
   Future<Version> get storeVersion async {
     final packageInfo = await PackageInfo.fromPlatform();
     _response =
@@ -34,6 +35,7 @@ class Siren {
     return Version.parse(_response.version);
   }
 
+  /// This method will get the store version of your app.
   Future<Version> get localVersion async {
     final packageInfo = await PackageInfo.fromPlatform();
     final currentVersion = packageInfo.version;
