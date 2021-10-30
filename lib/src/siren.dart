@@ -27,6 +27,19 @@ class Siren {
     throw UnimplementedError('This lib only supports Android, iOS and MacOS');
   }
 
+  Future<Version> get storeVersion async {
+    final packageInfo = await PackageInfo.fromPlatform();
+    _response =
+        await _getStoreClient().getStoreResponse(from: packageInfo.packageName);
+    return Version.parse(_response.version);
+  }
+
+  Future<Version> get localVersion async {
+    final packageInfo = await PackageInfo.fromPlatform();
+    final currentVersion = packageInfo.version;
+    return Version.parse(currentVersion);
+  }
+
   /// This method checks for an update in the application store and returns if there is a newer version than the local one.
   Future<bool> updateIsAvailable() async {
     final packageInfo = await PackageInfo.fromPlatform();
