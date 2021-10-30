@@ -33,6 +33,12 @@ class MyApp extends StatelessWidget {
                     child: const Text('Check Update'),
                     onPressed: () => siren.promptUpdate(context),
                   )
+                  Text(
+                    'Local Version: ${siren.localVersion}',
+                  ),
+                  Text(
+                    'Store Version: ${siren.storeVersion}',
+                  ),
                 ],
               ),
             ),
