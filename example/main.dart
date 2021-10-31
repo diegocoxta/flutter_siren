@@ -33,11 +33,31 @@ class MyApp extends StatelessWidget {
                     child: const Text('Check Update'),
                     onPressed: () => siren.promptUpdate(context),
                   ),
-                  Text(
-                    'Local Version: ${await siren.localVersion}',
+                  FutureBuilder(
+                    builder: (context, snapshot) {
+                      if (ConnectionState.active != null && !snapshot.hasData) {
+                        return const Center(child: Text('Loading'));
+                      }
+                      if (ConnectionState.done != null && snapshot.hasError) {
+                        return const Center(child: Text(snapshot.error));
+                      }
+
+                      return Text('Local Version: ${snapshot.data.toString()}')
+                    },
+                    future: siren.localVersion,
                   ),
-                  Text(
-                    'Store Version: ${await siren.storeVersion}',
+                  FutureBuilder(
+                    builder: (context, snapshot) {
+                      if (ConnectionState.active != null && !snapshot.hasData) {
+                        return const Center(child: Text('Loading...'));
+                      }
+                      if (ConnectionState.done != null && snapshot.hasError) {
+                        return const Center(child: Text(snapshot.error));
+                      }
+
+                      return Text('Store Version: ${snapshot.data.toString()}')
+                    },
+                    future: siren.storeVersion,
                   ),
                 ],
               ),
