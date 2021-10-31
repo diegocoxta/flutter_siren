@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_siren/flutter_siren.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -35,27 +36,31 @@ class MyApp extends StatelessWidget {
                   ),
                   FutureBuilder(
                     builder: (context, snapshot) {
-                      if (ConnectionState.active != null && !snapshot.hasData) {
-                        return const Center(child: Text('Loading'));
+                      if (snapshot.hasData) {
+                        return Text(
+                            'Local Version: ${snapshot.data.toString()}');
+                      } else if (snapshot.hasError) {
+                        return Center(
+                            child: Text(snapshot.error?.toString() ?? "Error"));
+                      } else {
+                        return const Center(
+                            child: Text('Local Version: Loading...'));
                       }
-                      if (ConnectionState.done != null && snapshot.hasError) {
-                        return const Center(child: Text(snapshot.error));
-                      }
-
-                      return Text('Local Version: ${snapshot.data.toString()}')
                     },
                     future: siren.localVersion,
                   ),
                   FutureBuilder(
                     builder: (context, snapshot) {
-                      if (ConnectionState.active != null && !snapshot.hasData) {
-                        return const Center(child: Text('Loading...'));
+                      if (snapshot.hasData) {
+                        return Text(
+                            'Store Version: ${snapshot.data.toString()}');
+                      } else if (snapshot.hasError) {
+                        return Center(
+                            child: Text(snapshot.error?.toString() ?? "Error"));
+                      } else {
+                        return const Center(
+                            child: Text('Store Version: Loading...'));
                       }
-                      if (ConnectionState.done != null && snapshot.hasError) {
-                        return const Center(child: Text(snapshot.error));
-                      }
-
-                      return Text('Store Version: ${snapshot.data.toString()}')
                     },
                     future: siren.storeVersion,
                   ),
