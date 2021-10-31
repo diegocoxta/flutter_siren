@@ -24,8 +24,3 @@ class SirenGooglePlayStore implements SirenStoreService<SirenStoreResponse> {
     return SirenStoreResponse(version: version, package: from, url: url);
   }
 }
-/*
-Current Version</div><span class="htlgb"><div class="IQ1z0d"><span class="htlgb">21.6.5
-Current Version</div><span class="htlgb"><div class="IQ1z0d"><span class="htlgb">1.25.0</span>
-Current Version</div><span class="htlgb"><div class="IQ1z0d"><span class="htlgb">4.4.8
-*/
