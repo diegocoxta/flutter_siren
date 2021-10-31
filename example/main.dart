@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
                   TextButton(
                     child: const Text('Check Update'),
                     onPressed: () => siren.promptUpdate(context),
-                  )
+                  ),
                   Text(
                     'Local Version: ${await siren.localVersion}',
                   ),
