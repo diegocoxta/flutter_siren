@@ -5,6 +5,28 @@ void main() {
   runApp(const MyApp());
 }
 
+class VersionText extends StatelessWidget {
+  final Future data;
+
+  const VersionText(this.data, {Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Text(snapshot.data.toString());
+        } else if (snapshot.hasError) {
+          return Text(snapshot.error?.toString() ?? "Error");
+        } else {
+          return const Text('Loading...');
+        }
+      },
+      future: data,
+    );
+  }
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -34,36 +56,10 @@ class MyApp extends StatelessWidget {
                     child: const Text('Check Update'),
                     onPressed: () => siren.promptUpdate(context),
                   ),
-                  FutureBuilder(
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        return Text(
-                            'Local Version: ${snapshot.data.toString()}');
-                      } else if (snapshot.hasError) {
-                        return Center(
-                            child: Text(snapshot.error?.toString() ?? "Error"));
-                      } else {
-                        return const Center(
-                            child: Text('Local Version: Loading...'));
-                      }
-                    },
-                    future: siren.localVersion,
-                  ),
-                  FutureBuilder(
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        return Text(
-                            'Store Version: ${snapshot.data.toString()}');
-                      } else if (snapshot.hasError) {
-                        return Center(
-                            child: Text(snapshot.error?.toString() ?? "Error"));
-                      } else {
-                        return const Center(
-                            child: Text('Store Version: Loading...'));
-                      }
-                    },
-                    future: siren.storeVersion,
-                  ),
+                  const Text('Local Version:'),
+                  VersionText(siren.localVersion),
+                  const Text('Store Version:'),
+                  VersionText(siren.storeVersion),
                 ],
               ),
             ),
