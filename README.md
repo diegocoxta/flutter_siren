@@ -97,5 +97,15 @@ FutureBuilder<bool>(
 );
 ```
 
+## Accessing store and local versions
+
+Your can use the `localVersion` or `storeVersion` getters to access the current version status of your app!  
+```dart 
+final siren = Siren();
+
+final local = siren.localVersion;
+final store = siren.storeVersion;
+```
+
 ## Inspiration
 These awesome packages: [Siren](https://github.com/ArtSabintsev/Siren) and [react-native-siren](https://github.com/GantMan/react-native-siren)

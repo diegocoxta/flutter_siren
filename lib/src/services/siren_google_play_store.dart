@@ -11,8 +11,9 @@ class SirenGooglePlayStore implements SirenStoreService<SirenStoreResponse> {
     final url = 'https://play.google.com/store/apps/details?id=$from&hl=en';
     final response = await client.get(Uri.parse(url));
 
-    final match = RegExp(r'Current Version.+>([\d.]{1,20})(?=<\/span>)')
-        .firstMatch(response.body);
+    final match =
+        RegExp(r'Current Version.+>([\d.]{1,20})(?=<\/span><\/div><\/span>)')
+            .firstMatch(response.body);
 
     if (match == null) {
       return SirenStoreResponse(version: '', package: '', url: url);

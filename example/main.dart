@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_siren/flutter_siren.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -32,7 +33,37 @@ class MyApp extends StatelessWidget {
                   TextButton(
                     child: const Text('Check Update'),
                     onPressed: () => siren.promptUpdate(context),
-                  )
+                  ),
+                  FutureBuilder(
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return Text(
+                            'Local Version: ${snapshot.data.toString()}');
+                      } else if (snapshot.hasError) {
+                        return Center(
+                            child: Text(snapshot.error?.toString() ?? "Error"));
+                      } else {
+                        return const Center(
+                            child: Text('Local Version: Loading...'));
+                      }
+                    },
+                    future: siren.localVersion,
+                  ),
+                  FutureBuilder(
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return Text(
+                            'Store Version: ${snapshot.data.toString()}');
+                      } else if (snapshot.hasError) {
+                        return Center(
+                            child: Text(snapshot.error?.toString() ?? "Error"));
+                      } else {
+                        return const Center(
+                            child: Text('Store Version: Loading...'));
+                      }
+                    },
+                    future: siren.storeVersion,
+                  ),
                 ],
               ),
             ),
