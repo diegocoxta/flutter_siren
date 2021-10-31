@@ -1,3 +1,12 @@
+# [1.2.0](https://github.com/diegocosta/flutter_siren/compare/v1.1.1...v1.2.0) (2021-10-31)
+
+
+### Features
+
+* added storeVersion and localVersion getters. ([bd523c6](https://github.com/diegocosta/flutter_siren/commit/bd523c6a7a2b1d5a0f5c7a672a3689abed883251))
+
+
+
 ## [1.1.1](https://github.com/diegocosta/flutter_siren/compare/v1.1.0...v1.1.1) (2021-10-29)
 
 
@@ -43,21 +52,6 @@
 ### BREAKING CHANGES
 
 * upgrade dependencies and null safety support
-
-
-
-# [0.8.0](https://github.com/diegocosta/flutter_siren/compare/v0.5.0...v0.8.0) (2021-10-28)
-
-
-### Bug Fixes
-
-* flatbutton replaced to textbutton ([f5f8c3a](https://github.com/diegocosta/flutter_siren/commit/f5f8c3a680bfe6a627a82c5b7534ccd0c462f07c))
-* regex to get android version fixed ([e49b71a](https://github.com/diegocosta/flutter_siren/commit/e49b71a05c8fdc75909ec9c362b21542ddf3562f))
-
-
-### Features
-
-* using package version to compare semver strings ([90141c2](https://github.com/diegocosta/flutter_siren/commit/90141c26d83cc0448becad2b8e5cf8b9db1901d3))
 
 
 
