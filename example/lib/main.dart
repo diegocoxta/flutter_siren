@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_siren/flutter_siren.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   const Text(
-                    'Press the following button to show the update dialog:',
+                    'Please change the iOS Bundle Identifier or the Android Package namespace for a value of an app published in stores and press the following button to show the update dialog:',
                   ),
                   TextButton(
                     child: const Text('Check Update'),
