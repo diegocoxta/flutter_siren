@@ -34,10 +34,10 @@ class MyApp extends StatelessWidget {
                     onPressed: () => siren.promptUpdate(context),
                   )
                   Text(
-                    'Local Version: ${siren.localVersion}',
+                    'Local Version: ${await siren.localVersion}',
                   ),
                   Text(
-                    'Store Version: ${siren.storeVersion}',
+                    'Store Version: ${await siren.storeVersion}',
                   ),
                 ],
               ),

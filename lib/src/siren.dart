@@ -44,17 +44,10 @@ class Siren {
 
   /// This method checks for an update in the application store and returns if there is a newer version than the local one.
   Future<bool> updateIsAvailable() async {
-    final packageInfo = await PackageInfo.fromPlatform();
+    final localVer = await localVersion;
+    final storeVer = await storeVersion;
 
-    final currentVersion = packageInfo.version;
-    final packageName = packageInfo.packageName;
-
-    _response = await _getStoreClient().getStoreResponse(from: packageName);
-
-    final updateIsAvailable =
-        Version.parse(_response.version) > Version.parse(currentVersion);
-
-    return updateIsAvailable;
+    return storeVer > localVer;
   }
 
   /// This method shows an customizable AlertDialog if an update is available.
