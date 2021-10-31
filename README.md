@@ -4,6 +4,9 @@ The Flutter port of the popular [Siren](https://github.com/ArtSabintsev/Siren), 
 
 🚀 Supports iOS, Android and MacOS.
 
+## Requirements
+Your package must follow the [Semantic Versioning](https://semver.org/)
+
 ## Install
 Add this to your package's pubspec.yaml file:
 
