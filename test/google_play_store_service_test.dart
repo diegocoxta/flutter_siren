@@ -10,25 +10,27 @@ void main() async {
     });
   }
 
-  test('should return the Android app version', () async {
-    mockClient('''
-    <div class="hAyfc"><div class="BgcNfc">Size</div><span class="htlgb"><div class="IQ1z0d"><span class="htlgb">42M</span></div></span></div><div class="hAyfc"><div class="BgcNfc">Installs</div><span class="htlgb"><div class="IQ1z0d"><span class="htlgb">100,000+</span></div></span></div><div class="hAyfc"><div class="BgcNfc">Current Version</div><span class="htlgb"><div class="IQ1z0d"><span class="htlgb">1.25.0</span></div></span></div><div class="hAyfc"><div class="BgcNfc">Requires Android</div><span class="htlgb"><div class="IQ1z0d"><span class="htlgb">4.4 and up</span></div></span></div><div class="hAyfc"><div class="BgcNfc">Content Rating</div><span class="htlgb"><div class="IQ1z0d"><span class="htlgb"><div>All ages</div>
-    ''');
+  group('SirenGooglePlayStore', () {
+    test('should return the Android app version', () async {
+      mockClient('''
+      <div class="hAyfc"><div class="BgcNfc">Size</div><span class="htlgb"><div class="IQ1z0d"><span class="htlgb">42M</span></div></span></div><div class="hAyfc"><div class="BgcNfc">Installs</div><span class="htlgb"><div class="IQ1z0d"><span class="htlgb">100,000+</span></div></span></div><div class="hAyfc"><div class="BgcNfc">Current Version</div><span class="htlgb"><div class="IQ1z0d"><span class="htlgb">1.25.0</span></div></span></div><div class="hAyfc"><div class="BgcNfc">Requires Android</div><span class="htlgb"><div class="IQ1z0d"><span class="htlgb">4.4 and up</span></div></span></div><div class="hAyfc"><div class="BgcNfc">Content Rating</div><span class="htlgb"><div class="IQ1z0d"><span class="htlgb"><div>All ages</div>
+      ''');
 
-    final details = await SirenGooglePlayStore()
-        .getStoreResponse(from: 'com.android.chrome');
+      final details = await SirenGooglePlayStore()
+          .getStoreResponse(from: 'com.android.chrome');
 
-    expect(details.version, '1.25.0');
-    expect(details.package, 'com.android.chrome');
-  });
+      expect(details.version, '1.25.0');
+      expect(details.package, 'com.android.chrome');
+    });
 
-  test('should not return the Android Google Chrome app version', () async {
-    mockClient('<html><body>not expected response</body></html>');
+    test('should not return the Android Google Chrome app version', () async {
+      mockClient('<html><body>not expected response</body></html>');
 
-    final details = await SirenGooglePlayStore()
-        .getStoreResponse(from: 'com.android.chrome');
+      final details = await SirenGooglePlayStore()
+          .getStoreResponse(from: 'com.android.chrome');
 
-    expect(details.version, '');
-    expect(details.package, '');
+      expect(details.version, '');
+      expect(details.package, '');
+    });
   });
 }

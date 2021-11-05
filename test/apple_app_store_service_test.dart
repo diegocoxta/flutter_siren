@@ -12,28 +12,30 @@ void main() async {
     });
   }
 
-  test('should return the iOS Google Chrome app version', () async {
-    mockClient({
-      'resultCount': 1,
-      'results': [
-        {'version': '83.0.4103.88', 'trackId': 535886823}
-      ]
+  group('SirenAppleAppStore', () {
+    test('returns the app version', () async {
+      mockClient({
+        'resultCount': 1,
+        'results': [
+          {'version': '83.0.4103.88', 'trackId': 535886823}
+        ]
+      });
+
+      final details = await SirenAppleAppStore()
+          .getStoreResponse(from: 'com.google.chrome.ios');
+
+      expect(details.version, '83.0.4103.88');
+      expect(details.package, '535886823');
     });
 
-    final details = await SirenAppleAppStore()
-        .getStoreResponse(from: 'com.google.chrome.ios');
+    test('does not return the app version when results are empty', () async {
+      mockClient({'resultCount': 0, 'results': []});
 
-    expect(details.version, '83.0.4103.88');
-    expect(details.package, '535886823');
-  });
+      final details = await SirenAppleAppStore()
+          .getStoreResponse(from: 'com.google.chrome.iosx');
 
-  test('should not return the iOS Google Chrome app version', () async {
-    mockClient({'resultCount': 0, 'results': []});
-
-    final details = await SirenAppleAppStore()
-        .getStoreResponse(from: 'com.google.chrome.iosx');
-
-    expect(details.version, '');
-    expect(details.package, '');
+      expect(details.version, '');
+      expect(details.package, '');
+    });
   });
 }
